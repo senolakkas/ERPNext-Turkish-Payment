@@ -8,9 +8,9 @@ from frappe import _
 
 def get_payment_url(doc, method):
 	if doc.docstatus == 1:
-		if doc.payment_gateway == "Razorpay":
+		if doc.payment_gateway == "Iyzipay":
 			frappe.local.response["type"] = "redirect"
-			frappe.local.response["location"] = "./razorpay_checkout?payment_request={0}".format(doc.name)
+			frappe.local.response["location"] = "./iyzipay_checkout?payment_request={0}".format(doc.name)
 	else:
 		frappe.respond_as_web_page(_("Invalid Payment Request"),
 			_("Payment Request has been canceled by vendor"), success=False,
@@ -25,7 +25,7 @@ def validate_price_list_currency(doc, method):
 
 		payment_gateway_account = frappe.get_doc("Payment Gateway Account", doc.payment_gateway_account)
 
-		if payment_gateway_account.payment_gateway=="Razorpay":
+		if payment_gateway_account.payment_gateway=="Iyzipay":
 			price_list_currency = frappe.db.get_value("Price List", doc.price_list, "currency")
 
 			validate_transaction_currency(price_list_currency)
@@ -35,26 +35,26 @@ def validate_price_list_currency(doc, method):
 
 def validate_transaction_currency(transaction_currency):
 	if transaction_currency != "INR":
-		frappe.throw(_("Please select another payment method. Razorpay does not support transactions in currency '{0}'").format(transaction_currency))
+		frappe.throw(_("Please select another payment method. Iyzipay does not support transactions in currency '{0}'").format(transaction_currency))
 
 def make_log_entry(error, params):
 	frappe.db.rollback()
 
 	frappe.get_doc({
-		"doctype": "Razorpay Log",
+		"doctype": "Iyzipay Log",
 		"error": error,
 		"params": params
 	}).insert(ignore_permissions=True)
 
 	frappe.db.commit()
 
-def get_razorpay_settings():
-	settings = frappe.db.get_singles_dict('Razorpay Settings')
+def get_iyzipay_settings():
+	settings = frappe.db.get_singles_dict('Iyzipay Settings')
 
 	if settings.api_key and settings.api_secret:
-		settings["api_secret"] = frappe.get_doc("Razorpay Settings").get_password(fieldname="api_secret")
+		settings["api_secret"] = frappe.get_doc("Iyzipay Settings").get_password(fieldname="api_secret")
 
-	elif not settings.api_key and frappe.local.conf.get('Razorpay Settings', {}).get('api_key'):
-		settings = frappe._dict(frappe.local.conf['Razorpay Settings'])
+	elif not settings.api_key and frappe.local.conf.get('Iyzipay Settings', {}).get('api_key'):
+		settings = frappe._dict(frappe.local.conf['Iyzipay Settings'])
 
 	return settings

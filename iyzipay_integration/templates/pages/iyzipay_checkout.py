@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 import frappe
 from frappe import _
 from frappe.utils import get_url, flt
-from razorpay_integration.utils import make_log_entry, validate_transaction_currency, get_razorpay_settings
-from razorpay_integration.exceptions import InvalidRequest, AuthenticationError, GatewayError
+from iyzipay_integration.utils import make_log_entry, validate_transaction_currency, get_iyzipay_settings
+from iyzipay_integration.exceptions import InvalidRequest, AuthenticationError, GatewayError
 import urllib
 
 no_cache = 1
@@ -16,9 +16,9 @@ expected_keys = ('amount', 'title', 'description', 'doctype', 'name',
 
 def get_context(context):
 	context.no_cache = 1
-	context.api_key = get_razorpay_settings().api_key
+	context.api_key = get_iyzipay_settings().api_key
 
-	context.brand_image = (frappe.db.get_value("Razorpay Settings", None, "brand_image")
+	context.brand_image = (frappe.db.get_value("Iyzipay Settings", None, "brand_image")
 		or './assets/erpnext/images/erp-icon.svg')
 
 	if frappe.form_dict.payment_request:
@@ -60,44 +60,44 @@ def get_checkout_url(**kwargs):
 	if missing_keys:
 		frappe.throw(_('Missing keys to build checkout URL: {0}').format(", ".join(list(missing_keys))))
 
-	return get_url('/razorpay_checkout?{0}'.format(urllib.urlencode(kwargs)))
+	return get_url('/iyzipay_checkout?{0}'.format(urllib.urlencode(kwargs)))
 
 @frappe.whitelist(allow_guest=True)
-def make_payment(razorpay_payment_id, options, reference_doctype, reference_docname):
+def make_payment(iyzipay_payment_id, options, reference_doctype, reference_docname):
 	try:
-		razorpay_payment = frappe.get_doc({
-			"doctype": "Razorpay Payment",
-			"razorpay_payment_id": razorpay_payment_id,
+		iyzipay_payment = frappe.get_doc({
+			"doctype": "Iyzipay Payment",
+			"iyzipay_payment_id": iyzipay_payment_id,
 			"data": options,
 			"reference_doctype": reference_doctype,
 			"reference_docname": reference_docname
 		})
 
-		razorpay_payment.insert(ignore_permissions=True)
+		iyzipay_payment.insert(ignore_permissions=True)
 
-		if frappe.db.get_value("Razorpay Payment", razorpay_payment.name, "status") == "Authorized":
+		if frappe.db.get_value("Iyzipay Payment", iyzipay_payment.name, "status") == "Authorized":
 			return {
-				"redirect_to": razorpay_payment.flags.redirect_to or "razorpay-payment-success",
+				"redirect_to": iyzipay_payment.flags.redirect_to or "iyzipay-payment-success",
 				"status": 200
 			}
 
 	except AuthenticationError as e:
 		make_log_entry(e.message, options)
 		return{
-			"redirect_to": frappe.redirect_to_message(_('Server Error'), _("Seems issue with server's razorpay config. Don't worry, in case of failure amount will get refunded to your account.")),
+			"redirect_to": frappe.redirect_to_message(_('Server Error'), _("Seems issue with server's iyzipay config. Don't worry, in case of failure amount will get refunded to your account.")),
 			"status": 401
 		}
 
 	except InvalidRequest as e:
 		make_log_entry(e.message, options)
 		return {
-			"redirect_to": frappe.redirect_to_message(_('Server Error'), _("Seems issue with server's razorpay config. Don't worry, in case of failure amount will get refunded to your account.")),
+			"redirect_to": frappe.redirect_to_message(_('Server Error'), _("Seems issue with server's iyzipay config. Don't worry, in case of failure amount will get refunded to your account.")),
 			"status": 400
 		}
 
 	except GatewayError as e:
 		make_log_entry(e.message, options)
 		return {
-			"redirect_to": frappe.redirect_to_message(_('Server Error'), _("Seems issue with server's razorpay config. Don't worry, in case of failure amount will get refunded to your account.")),
+			"redirect_to": frappe.redirect_to_message(_('Server Error'), _("Seems issue with server's iyzipay config. Don't worry, in case of failure amount will get refunded to your account.")),
 			"status": 500
 		}

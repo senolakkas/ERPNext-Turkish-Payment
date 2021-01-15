@@ -1,3 +1,0 @@
-from __future__ import unicode_literals
-
-from templates.pages.razorpay_checkout import get_checkout_url as get_razorpay_checkout_url

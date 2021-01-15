@@ -1,13 +1,13 @@
-## Razorpay Integration
+## Iyzipay Integration
 
-Razorpay Payment Gateway Integration with Frappe/ERPNext
+Iyzipay Payment Gateway Integration with Frappe/ERPNext
 
 ### Usage
 
 To get url for payment
 
 1. Make a DocType for Order
-2. On "pay now" button, redirect to razorpay_checkout page
+2. On "pay now" button, redirect to iyzipay_checkout page
 3. When payment is authorized `on_payment_authorized` is called on the Order
 
 ### Example
@@ -15,7 +15,7 @@ To get url for payment
 #### "API"
 
 ```
-from razorpay_integration.api import get_razorpay_checkout_url
+from iyzipay_integration.api import get_iyzipay_checkout_url
 
 @frappe.whitelist(allow_guest=True)
 def make_payment(full_name, email, company, amount, workshop=None, conference=None):
@@ -30,8 +30,8 @@ def make_payment(full_name, email, company, amount, workshop=None, conference=No
 		'amount': amount
 	}).insert()
 
-	# get razorpay url
-	url = get_razorpay_checkout_url(**{
+	# get iyzipay url
+	url = get_iyzipay_checkout_url(**{
 		'amount': amount,
 		'title': 'ERPNext Conference Tickets',
 		'description': '{0} passes for conference, {1} passes for workshop'.format(int(conference), int(workshop)),

@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import frappe
 import unittest
 
-# test_records = frappe.get_test_records('Razorpay Log')
+# test_records = frappe.get_test_records('Iyzipay Log')
 
-class TestRazorpayLog(unittest.TestCase):
+class TestIyzipayLog(unittest.TestCase):
 	pass

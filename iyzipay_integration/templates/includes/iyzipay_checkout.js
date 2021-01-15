@@ -7,7 +7,7 @@ $(document).ready(function(){
 			"description": "{{ description }}",
 			"image": "{{ brand_image }}",
 			"handler": function (response){
-				razorpay.make_payment_log(response, options, "{{ doctype }}", "{{ name }}");
+				iyzipay.make_payment_log(response, options, "{{ doctype }}", "{{ name }}");
 			},
 			"prefill": {
 				"name": "{{ payer_name }}",
@@ -26,24 +26,24 @@ $(document).ready(function(){
 			}
 		};
 
-		var rzp = new Razorpay(options);
+		var rzp = new Iyzipay(options);
 		rzp.open();
 		//	e.preventDefault();
 	})();
 })
 
-frappe.provide('razorpay');
+frappe.provide('iyzipay');
 
-razorpay.make_payment_log = function(response, options, doctype, docname){
-	$('.razorpay-loading').addClass('hidden');
-	$('.razorpay-confirming').removeClass('hidden');
+iyzipay.make_payment_log = function(response, options, doctype, docname){
+	$('.iyzipay-loading').addClass('hidden');
+	$('.iyzipay-confirming').removeClass('hidden');
 
 	frappe.call({
-		method:"razorpay_integration.templates.pages.razorpay_checkout.make_payment",
+		method:"iyzipay_integration.templates.pages.iyzipay_checkout.make_payment",
 		freeze:true,
 		headers: {"X-Requested-With": "XMLHttpRequest"},
 		args: {
-			"razorpay_payment_id": response.razorpay_payment_id,
+			"iyzipay_payment_id": response.iyzipay_payment_id,
 			"options": options,
 			"reference_doctype": doctype,
 			"reference_docname": docname

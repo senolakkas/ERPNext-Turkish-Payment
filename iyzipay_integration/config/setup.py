@@ -9,8 +9,8 @@ def get_data():
 			"items": [
 				{
 					"type": "doctype",
-					"name": "Razorpay Settings",
-					"description": _("Setup Razorpay credentials"),
+					"name": "Iyzipay Settings",
+					"description": _("Setup Iyzipay credentials"),
 					"hide_count": True
 				}
 			]

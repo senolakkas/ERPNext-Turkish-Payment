@@ -5,15 +5,15 @@
 {%- block header -%}{% endblock %}
 
 {% block script %}
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>{% include "templates/includes/razorpay_checkout.js" %}</script>
+<script src="https://checkout.iyzipay.com/v1/checkout.js"></script>
+<script>{% include "templates/includes/iyzipay_checkout.js" %}</script>
 {% endblock %}
 
 {%- block page_content -%}
 
 <p class='lead text-center centered'>
-	<span class='razorpay-loading'>Loading Payment System</span>
-	<span class='razorpay-confirming hidden'>Confirming Payment</span>
+	<span class='iyzipay-loading'>Loading Payment System</span>
+	<span class='iyzipay-confirming hidden'>Confirming Payment</span>
 </p>
 
 {% endblock %}

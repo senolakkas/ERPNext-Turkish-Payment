@@ -7,9 +7,9 @@ with open('requirements.txt') as f:
 version = '0.0.1'
 
 setup(
-	name='razorpay_integration',
+	name='iyzipay_integration',
 	version=version,
-	description='Razorpay Payment Gateway Integration',
+	description='Iyzipay Payment Gateway Integration',
 	author='Frappe Technologies Pvt. Ltd.',
 	author_email='info@frappe.io',
 	packages=find_packages(),

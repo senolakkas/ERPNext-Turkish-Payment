@@ -4,15 +4,15 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include razorpay_integration *.css
-recursive-include razorpay_integration *.csv
-recursive-include razorpay_integration *.html
-recursive-include razorpay_integration *.ico
-recursive-include razorpay_integration *.js
-recursive-include razorpay_integration *.json
-recursive-include razorpay_integration *.md
-recursive-include razorpay_integration *.png
-recursive-include razorpay_integration *.py
-recursive-include razorpay_integration *.svg
-recursive-include razorpay_integration *.txt
-recursive-exclude razorpay_integration *.pyc
+recursive-include iyzipay_integration *.css
+recursive-include iyzipay_integration *.csv
+recursive-include iyzipay_integration *.html
+recursive-include iyzipay_integration *.ico
+recursive-include iyzipay_integration *.js
+recursive-include iyzipay_integration *.json
+recursive-include iyzipay_integration *.md
+recursive-include iyzipay_integration *.png
+recursive-include iyzipay_integration *.py
+recursive-include iyzipay_integration *.svg
+recursive-include iyzipay_integration *.txt
+recursive-exclude iyzipay_integration *.pyc

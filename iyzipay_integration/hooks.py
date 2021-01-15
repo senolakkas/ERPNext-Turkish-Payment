@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-app_name = "razorpay_integration"
-app_title = "Razorpay Integration"
+app_name = "iyzipay_integration"
+app_title = "Iyzipay Integration"
 app_publisher = "Frappe Technologies Pvt. Ltd."
-app_description = "Razorpay Payment Gateway Integration"
+app_description = "Iyzipay Payment Gateway Integration"
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
 app_email = "info@frappe.io"
@@ -15,12 +15,12 @@ hide_in_installer = True
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/razorpay_integration/css/razorpay_integration.css"
-# app_include_js = "/assets/razorpay_integration/js/razorpay_integration.js"
+# app_include_css = "/assets/iyzipay_integration/css/iyzipay_integration.css"
+# app_include_js = "/assets/iyzipay_integration/js/iyzipay_integration.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/razorpay_integration/css/razorpay_integration.css"
-# web_include_js = "/assets/razorpay_integration/js/razorpay_integration.js"
+# web_include_css = "/assets/iyzipay_integration/css/iyzipay_integration.css"
+# web_include_js = "/assets/iyzipay_integration/js/iyzipay_integration.js"
 
 # Home Pages
 # ----------
@@ -34,7 +34,7 @@ hide_in_installer = True
 # }
 
 # Website user home page (by function)
-# get_website_user_home_page = "razorpay_integration.utils.get_home_page"
+# get_website_user_home_page = "iyzipay_integration.utils.get_home_page"
 
 # Generators
 # ----------
@@ -45,14 +45,14 @@ hide_in_installer = True
 # Installation
 # ------------
 
-# before_install = "razorpay_integration.install.before_install"
-# after_install = "razorpay_integration.install.after_install"
+# before_install = "iyzipay_integration.install.before_install"
+# after_install = "iyzipay_integration.install.after_install"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "razorpay_integration.notifications.get_notification_config"
+# notification_config = "iyzipay_integration.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -72,11 +72,11 @@ hide_in_installer = True
 
 doc_events = {
 	"Payment Request": {
-		"validate": "razorpay_integration.razorpay_integration.doctype.razorpay_settings.razorpay_settings.validate_razorpay_credentials",
-		"get_payment_url": "razorpay_integration.utils.get_payment_url"
+		"validate": "iyzipay_integration.iyzipay_integration.doctype.iyzipay_settings.iyzipay_settings.validate_iyzipay_credentials",
+		"get_payment_url": "iyzipay_integration.utils.get_payment_url"
 	},
 	"Shopping Cart Settings": {
-		"validate": "razorpay_integration.utils.validate_price_list_currency"
+		"validate": "iyzipay_integration.utils.validate_price_list_currency"
 	}
 }
 
@@ -85,20 +85,20 @@ doc_events = {
 
 scheduler_events = {
 	"all": [
-		"razorpay_integration.razorpay_integration.doctype.razorpay_payment.razorpay_payment.authorise_payment",
-		"razorpay_integration.razorpay_integration.doctype.razorpay_payment.razorpay_payment.capture_payment"
+		"iyzipay_integration.iyzipay_integration.doctype.iyzipay_payment.iyzipay_payment.authorise_payment",
+		"iyzipay_integration.iyzipay_integration.doctype.iyzipay_payment.iyzipay_payment.capture_payment"
 	]
 }
 
 # Testing
 # -------
 
-# before_tests = "razorpay_integration.install.before_tests"
+# before_tests = "iyzipay_integration.install.before_tests"
 
 # Overriding Whitelisted Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "razorpay_integration.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "iyzipay_integration.event.get_events"
 # }
 
